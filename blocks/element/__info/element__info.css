@@ -1,0 +1,11 @@
+.element__info {
+  min-height: 79px;
+  background: #FFFFFF;
+  border-radius: 0px 0px 10px 10px;
+  width: 282px;
+  margin: 0;
+  position: relative;
+  top: -3px;
+  display: flex;
+  justify-content: space-between;
+}

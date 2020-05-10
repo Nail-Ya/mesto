@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pages/index.css">
+    <title>Mesto</title>
+  </head>
+
+<body class="page">
+  <header class="header">
+    <img src="./images/logo.svg" alt="Логотип место" class="header__logo">
+    <div class="header__line"></div>
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <img src="./images/kusto.jpg" alt="Фотография пользователя" class="profile__avatar">
+      <div class="profile__info">
+        <div class="profile__text">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <p class="profile__job">Исследователь океана</p>
+        </div>
+        <button class="profile__edit-button"></button>
+      </div>
+      <button class="profile__add-button"></button>
+    </section>
+
+    <section class="elements">
+      <div class="element">
+        <img src="./images/norway.jpg" alt="Норвегия Фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Норвегия</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/baikal.jpg" alt="Байкал фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Байкал</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/bali.jpg" alt="Бали Фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Бали</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/canada.jpg" alt="Канада Фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Канада</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/tibet.jpg" alt="Тибет Фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Тибет</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+      <div class="element">
+        <img src="./images/indonesia.jpg" alt="Индонезия Фото" class="element__img">
+        <div class="element__info">
+          <p class="element__name">Индонезия</p>
+          <img src="./images/heart.svg" alt="Лайк сердечко" class="element__like">
+        </div>
+      </div>
+    </section>
+    <section class="popup">
+      <form class="popup__container">
+        <p class="popup__text">Редактировать профиль </p>
+        <input type="text" class="popup__name" placeholder="Ваше имя">
+        <input type="text" class="popup__job" placeholder="Род деятельности">
+        <button class="popup__save-button" type="submit">Сохранить</button>
+        <button class="popup__close-button" type="button"></button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html>

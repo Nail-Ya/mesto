@@ -1,0 +1,12 @@
+@import url(./__logo/header__logo.css);
+@import url(./__line/header__line.css);
+
+.header {
+  min-height: 78px;
+}
+
+@media screen and (max-width: 424px) {
+  .header {
+    min-height: 84px;
+  }
+}
