@@ -26,63 +26,53 @@
     </section>
 
     <section class="elements">
-      <div class="element">
-        <img src="./images/norway.jpg" alt="Норвегия Фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Норвегия</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/baikal.jpg" alt="Байкал фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Байкал</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/bali.jpg" alt="Бали Фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Бали</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/canada.jpg" alt="Канада Фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Канада</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/tibet.jpg" alt="Тибет Фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Тибет</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
-      <div class="element">
-        <img src="./images/indonesia.jpg" alt="Индонезия Фото" class="element__img">
-        <div class="element__info">
-          <p class="element__name">Индонезия</p>
-          <button class="element__like-button" type="button"></button>
-        </div>
-      </div>
     </section>
-    <section class="popup">
-      <form class="popup__form">
-        <p class="popup__text">Редактировать профиль </p>
-        <input type="text" class="popup__input popup__input_edit_name" placeholder="Ваше имя">
-        <input type="text" class="popup__input popup__input_edit_job" placeholder="Род деятельности">
-        <button class="popup__save-button" type="submit">Сохранить</button>
-        <button class="popup__close-button" type="button"></button>
-      </form>
+
+    <section class="popups">
+      <div class="popup popup_edit_profile">
+        <form class="popup__form popup__form_edit_profile">
+          <p class="popup__text">Редактировать профиль </p>
+          <input type="text" class="popup__input popup__input_edit_name" placeholder="Ваше имя">
+          <input type="text" class="popup__input popup__input_edit_job" placeholder="Род деятельности">
+          <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
+          <button class="popup__close-button popup__close-button_edit_profile" type="button"></button>
+        </form>
+      </div>
+
+      <div class="popup popup_add_place">
+        <form class="popup__form popup__form_add_place">
+          <p class="popup__text">Новое место </p>
+          <input type="text" class="popup__input popup__input_place_name" placeholder="Название">
+          <input type="url" class="popup__input popup__input_place_link" placeholder="Ссылка на картинку">
+          <button class="popup__button popup__button_type_create" type="submit">Создать</button>
+          <button class="popup__close-button popup__close-button_add_place" type="button"></button>
+        </form>
+      </div>
+
+      <div class="popup popup_open_image">
+        <div class="popup__image-container">
+          <img class="popup__image">
+          <button class="popup__close-button popup__close-button_image-container" type="button"></button>
+          <p class="popup__image-name"></p>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer class="footer">
     <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
   </footer>
+
+  <template class="element-template">
+    <div class="element">
+      <img class="element__img">
+      <button class="element__delete-button" type="button"></button>
+      <div class="element__info">
+        <p class="element__name"></p>
+        <button class="element__like-button" type="button"></button>
+      </div>
+    </div>
+  </template>
   <script src="script.js"></script>
 </body>
 </html>
