@@ -125,7 +125,7 @@ function formSubmitHandlerAddPlace (evt) {
 // функция для закрытия любого попапа
 function closePopup (event) {
   if (event.target.closest('.popup__close-button')){
-    event.target.closest(".popup").classList.toggle('popup_opened');
+    event.target.closest('.popup').classList.toggle('popup_opened');
   }
 }
 
