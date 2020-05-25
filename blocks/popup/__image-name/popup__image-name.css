@@ -1,7 +1,11 @@
 .popup__image-name {
+  max-width: 75vw;
   color: #FFF;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
   margin-top: 10px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
