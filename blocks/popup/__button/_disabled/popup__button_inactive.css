@@ -2,4 +2,6 @@
   color: #c5c5c5;
   background: #f6f6f6;
   border: 1px solid #c5c5c5;
+  pointer-events: none;
+  transition: none;
 }

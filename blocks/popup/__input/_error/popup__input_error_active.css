@@ -1,5 +1,4 @@
 .popup__input_error_active {
-  font-family: Inter;
   font-weight: 400;
   font-size: 12px;
   line-height: 15px;
@@ -7,4 +6,7 @@
   width: 358px;
   margin: 5px auto 0 auto;
   display: block;
+  position: absolute;
+  top: auto;
+  left: 36px;
 }

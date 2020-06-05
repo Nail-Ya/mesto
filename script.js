@@ -49,8 +49,15 @@ const nameInput = document.querySelector('.popup__input_edit_name');
 const jobInput = document.querySelector('.popup__input_edit_job');
 const popups = document.querySelector('.popups');
 
-function openPopupEditProfile () {
+//функция для сбрасывания ошибок у формы
+function resetError (formItem, inputItem) {
+  const errorItem = formItem.querySelector(`#${inputItem.id}-error`);
+  inputItem.classList.remove('popup__input_type_error');
+  errorItem.classList.remove('popup__input_error_active');
+  errorItem.textContent = '';
+}
 
+function openPopupEditProfile () {
   popupEditProfile.classList.toggle('popup_opened');
   if (popupEditProfile.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent;
@@ -61,11 +68,14 @@ function openPopupEditProfile () {
     popupSaveButton.removeAttribute('disabled');
   }
   document.addEventListener('keydown', closePopupByPressingEsc);
+  // сбрасывание ошибки в импутах при повторном открытии попапа
+  resetError(formElementEditProfile, nameInput);
+  resetError(formElementEditProfile, jobInput);
 }
 
-
-function formSubmitHandler (evt) {
-  evt.preventDefault();
+// функция изменения имени и рода деятельности в секции profile
+function formSubmitHandler (event) {
+  event.preventDefault();
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   openPopupEditProfile();
@@ -85,23 +95,23 @@ function addPhoto (cardName,cardLink) {
   elementCopy.querySelector('.element__name').textContent = cardName;
 
   // возможность поставить лайк
- /*  const elementLikeButton = elementCopy.querySelector('.element__like-button');
+  const elementLikeButton = elementCopy.querySelector('.element__like-button');
   elementLikeButton.addEventListener('click', function () {
     elementLikeButton.classList.toggle('element__like-button_active');
   });
- */
+
   // возможность удаления карточки
-/*   const deleteButton = elementCopy.querySelector('.element__delete-button');
+  const deleteButton = elementCopy.querySelector('.element__delete-button');
   deleteButton.addEventListener('click', function () {
     const elementItem = deleteButton.closest('.element');
     elementItem.remove();
   });
- */
+
   // добавление в попап с картинкой: ссылки изображения, название карточки, атрибута alt изображения
-  elementImage.addEventListener('click', function (evt) {
+  elementImage.addEventListener('click', function (event) {
     document.addEventListener('keydown', closePopupByPressingEsc);
     popupOpenImage.classList.add('popup_opened');
-    const eventTarget = evt.target.closest('.element');
+    const eventTarget = event.target.closest('.element');
     const popupImageLink = eventTarget.querySelector('.element__img').src;
     const popupImageTextAndAltAttribute = eventTarget.querySelector('.element__name').textContent;
     openBigImage(popupImageLink, popupImageTextAndAltAttribute);
@@ -116,38 +126,27 @@ function openBigImage (imageSrcAttribute, imageTextAndAltAtrribute) {
   popupImage.alt = imageTextAndAltAtrribute;
 }
 
-//!!
-//!!
-// Внутри этой функции хочу вызвать функцию isValid
-//!!
 // функция открытия попапа для добавления фото на сайт
 function openPopupAddPlace () {
   popupAddPlace.classList.toggle('popup_opened');
   popupAddPlaceNameInput.value = '';
   popupAddPlaceLinkInput.value = '';
-
-  //isValid(formElementAddPlace, popupAddPlaceLinkInput, argument);
-
   document.addEventListener('keydown', closePopupByPressingEsc);
-}
-
-// функция добавления новой карточки на сайт из попапа
-function formSubmitHandlerAddPlace (evt) {
-  evt.preventDefault();
-  addPhoto(popupAddPlaceNameInput.value, popupAddPlaceLinkInput.value);
-  openPopupAddPlace();
-  document.removeEventListener('keydown', closePopupByPressingEsc);
-  //делаю кнопку нективной при открытии попапа
+  //сбрасывание ошибки в импутах при повторном открытии попапа
+  resetError(formElementAddPlace, popupAddPlaceLinkInput);
+  resetError(formElementAddPlace, popupAddPlaceNameInput);
+  //делаю кнопку нективной при повторном открытии попапа
   popupCreateButton.classList.add('popup__button_disabled');
   popupCreateButton.setAttribute('disabled', 'true');
 }
 
-/* // функция для закрытия любого попапа
-function closePopup (event) {
-  if (event.target.closest('.popup__close-button')){
-    event.target.closest('.popup').classList.toggle('popup_opened');
-  }
-} */
+// функция добавления новой карточки на сайт из попапа
+function formSubmitHandlerAddPlace (event) {
+  event.preventDefault();
+  addPhoto(popupAddPlaceNameInput.value, popupAddPlaceLinkInput.value);
+  openPopupAddPlace();
+  document.removeEventListener('keydown', closePopupByPressingEsc);
+}
 
 //метод forEach для обхода массива
 initialCards.forEach(function (item) {
@@ -159,21 +158,7 @@ initialCards.forEach(function (item) {
 profileAddButton.addEventListener('click', openPopupAddPlace);
 formElementAddPlace.addEventListener('submit', formSubmitHandlerAddPlace);
 
-
-//один слушатель для лайка и удаления фото
-function workPage (event) {
-  if (event.target.classList.contains('element__like-button')) {
-    event.target.classList.add('element__like-button_active');
-  }
-  if (event.target.classList.contains('element__delete-button')) {
-    event.target.closest('.element').remove();
-  }
-
-}
-
-elementsContainer.addEventListener('click', workPage);
-
-// функция для закрытия любого попапа
+// функция для закрытия попапов
 function closePopup (event) {
   if (event.target.classList.contains("popup_opened") || event.target.closest('.popup__close-button')){
     event.target.closest('.popup').classList.toggle('popup_opened');
@@ -184,11 +169,9 @@ function closePopup (event) {
 popups.addEventListener('click', closePopup);
 
 //функция закрытия попапов по нажатию клавиши Esc
-function closePopupByPressingEsc (evt){
-  if (evt.key === "Escape") {
+function closePopupByPressingEsc (event){
+  if (event.key === "Escape") {
     document.querySelector('.popup_opened').classList.remove('popup_opened');
     document.removeEventListener('keydown', closePopupByPressingEsc);
   }
 }
-
-
