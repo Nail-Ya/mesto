@@ -27,6 +27,7 @@ function isValid (formElement, inputElement, argument) {
   }
 };
 
+
 function setEventListeners (formElement, argument) {
   // Беру псевдомассив инпутов и превращаю его в обычный массив
   const inputList = Array.from(formElement.querySelectorAll(argument.inputSelector));

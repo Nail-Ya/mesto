@@ -49,6 +49,15 @@ const nameInput = document.querySelector('.popup__input_edit_name');
 const jobInput = document.querySelector('.popup__input_edit_job');
 const popups = document.querySelector('.popups');
 
+const formValidationOptions = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__error_visible'
+}
+
 //функция для сбрасывания ошибок у формы
 function resetError (formItem, inputItem) {
   const errorItem = formItem.querySelector(`#${inputItem.id}-error`);
@@ -57,20 +66,18 @@ function resetError (formItem, inputItem) {
   errorItem.textContent = '';
 }
 
+
 function openPopupEditProfile () {
   popupEditProfile.classList.toggle('popup_opened');
   if (popupEditProfile.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
   }
-  if (nameInput.validity.valid && jobInput.validity.valid) {
-    popupSaveButton.classList.remove('popup__button_disabled');
-    popupSaveButton.removeAttribute('disabled');
-  }
+  enableValidation(formValidationOptions);
   document.addEventListener('keydown', closePopupByPressingEsc);
   // сбрасывание ошибки в импутах при повторном открытии попапа
-  resetError(formElementEditProfile, nameInput);
-  resetError(formElementEditProfile, jobInput);
+  /* resetError(formElementEditProfile, nameInput);
+  resetError(formElementEditProfile, jobInput); */
 }
 
 // функция изменения имени и рода деятельности в секции profile
@@ -127,17 +134,20 @@ function openBigImage (imageSrcAttribute, imageTextAndAltAtrribute) {
 }
 
 // функция открытия попапа для добавления фото на сайт
-function openPopupAddPlace () {
+function openPopupAddPlace (formValidationOptions) {
   popupAddPlace.classList.toggle('popup_opened');
   popupAddPlaceNameInput.value = '';
   popupAddPlaceLinkInput.value = '';
   document.addEventListener('keydown', closePopupByPressingEsc);
+    //делаю кнопку нективной при повторном открытии попапа
+    popupCreateButton.classList.add('popup__button_disabled');
+    popupCreateButton.setAttribute('disabled', 'true');
+
   //сбрасывание ошибки в импутах при повторном открытии попапа
-  resetError(formElementAddPlace, popupAddPlaceLinkInput);
-  resetError(formElementAddPlace, popupAddPlaceNameInput);
-  //делаю кнопку нективной при повторном открытии попапа
-  popupCreateButton.classList.add('popup__button_disabled');
-  popupCreateButton.setAttribute('disabled', 'true');
+
+  hideInputError (formElementAddPlace, popupAddPlaceNameInput, formValidationOptions);
+  hideInputError (formElementAddPlace, popupAddPlaceLinkInput, formValidationOptions);
+
 }
 
 // функция добавления новой карточки на сайт из попапа
@@ -175,3 +185,6 @@ function closePopupByPressingEsc (event){
     document.removeEventListener('keydown', closePopupByPressingEsc);
   }
 }
+
+
+
