@@ -1,31 +1,3 @@
-// массив из задания проектной работы
-const initialCards = [
-  {
-      name: 'Архыз',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-      name: 'Челябинская область',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-      name: 'Иваново',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-      name: 'Камчатка',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-      name: 'Холмогорский район',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-      name: 'Байкал',
-      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
-
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
 const popupCloseButton = document.querySelector('.popup__close-button');
@@ -55,17 +27,8 @@ const formValidationOptions = {
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__error_visible'
+  errorClass: 'popup__input_error_active'
 }
-
-//функция для сбрасывания ошибок у формы
-function resetError (formItem, inputItem) {
-  const errorItem = formItem.querySelector(`#${inputItem.id}-error`);
-  inputItem.classList.remove('popup__input_type_error');
-  errorItem.classList.remove('popup__input_error_active');
-  errorItem.textContent = '';
-}
-
 
 function openPopupEditProfile () {
   popupEditProfile.classList.toggle('popup_opened');
@@ -76,8 +39,8 @@ function openPopupEditProfile () {
   enableValidation(formValidationOptions);
   document.addEventListener('keydown', closePopupByPressingEsc);
   // сбрасывание ошибки в импутах при повторном открытии попапа
-  /* resetError(formElementEditProfile, nameInput);
-  resetError(formElementEditProfile, jobInput); */
+  hideInputError (formElementEditProfile, nameInput, formValidationOptions);
+  hideInputError (formElementEditProfile, jobInput, formValidationOptions);
 }
 
 // функция изменения имени и рода деятельности в секции profile
@@ -134,21 +97,19 @@ function openBigImage (imageSrcAttribute, imageTextAndAltAtrribute) {
 }
 
 // функция открытия попапа для добавления фото на сайт
-function openPopupAddPlace (formValidationOptions) {
+function openPopupAddPlace () {
   popupAddPlace.classList.toggle('popup_opened');
   popupAddPlaceNameInput.value = '';
   popupAddPlaceLinkInput.value = '';
   document.addEventListener('keydown', closePopupByPressingEsc);
-    //делаю кнопку нективной при повторном открытии попапа
-    popupCreateButton.classList.add('popup__button_disabled');
-    popupCreateButton.setAttribute('disabled', 'true');
-
+  //делаю кнопку нективной при повторном открытии попапа если в первом открытии ввели корректный данные
+  setEventListeners (formElementAddPlace, formValidationOptions);
   //сбрасывание ошибки в импутах при повторном открытии попапа
-
   hideInputError (formElementAddPlace, popupAddPlaceNameInput, formValidationOptions);
   hideInputError (formElementAddPlace, popupAddPlaceLinkInput, formValidationOptions);
-
 }
+
+profileAddButton.addEventListener('click', openPopupAddPlace);
 
 // функция добавления новой карточки на сайт из попапа
 function formSubmitHandlerAddPlace (event) {
@@ -165,7 +126,6 @@ initialCards.forEach(function (item) {
   addPhoto(name, link);
 })
 
-profileAddButton.addEventListener('click', openPopupAddPlace);
 formElementAddPlace.addEventListener('submit', formSubmitHandlerAddPlace);
 
 // функция для закрытия попапов

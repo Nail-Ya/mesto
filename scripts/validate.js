@@ -27,7 +27,6 @@ function isValid (formElement, inputElement, argument) {
   }
 };
 
-
 function setEventListeners (formElement, argument) {
   // Беру псевдомассив инпутов и превращаю его в обычный массив
   const inputList = Array.from(formElement.querySelectorAll(argument.inputSelector));
@@ -89,5 +88,6 @@ enableValidation({
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_disabled',
   inputErrorClass: 'popup__input_type_error',
+  as: 'popup__input_type_error',
   errorClass: 'popup__input_error_active'
 });
