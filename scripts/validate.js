@@ -1,3 +1,13 @@
+// объект с настройками
+const argument = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input_error_active'
+}
+
 // Функция для добавления класса с ошибкой
 function showInputError (formElement, inputElement, errorMessage, argument) {
   const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
@@ -32,17 +42,17 @@ function setEventListeners (formElement, argument) {
   const inputList = Array.from(formElement.querySelectorAll(argument.inputSelector));
   // Нахожу в текущей форме кнопку отправки
   const buttonElement = formElement.querySelector(argument.submitButtonSelector);
-  toggleButtonState(inputList, buttonElement, argument.inactiveButtonClass);
+  // вызов функции handleFormInput чтобы кнопка была неактивной при открытии попапа если поля ввода пустые
+  handleFormInput(formElement, buttonElement, argument.inactiveButtonClass);
   // Обхожу все элементы полученного массива
   inputList.forEach((inputElement) => {
     // каждому полю добавляю обработчик события input
     inputElement.addEventListener('input', () => {
       // Внутри колбека вызываю isValid, передав ей форму и проверяемый элемент
       isValid(formElement, inputElement, argument);
-      // Вызываю toggleButtonState и передаю ей массив полей и кнопку
-      toggleButtonState(inputList, buttonElement, argument.inactiveButtonClass);
     });
   });
+  formElement.addEventListener('input', () => handleFormInput(formElement, buttonElement, argument.inactiveButtonClass));
 };
 
 function enableValidation (argument) {
@@ -59,35 +69,11 @@ function enableValidation (argument) {
   });
 };
 
-// Функция принимает массив полей
-function hasInvalidInput (inputList) {
-  // проходим по этому массиву методом some
-  return inputList.some((inputElement) => {
-    // Если поле не валидно, колбэк вернёт true. Обход массива прекратится и вся фунцкция hasInvalidInput вернёт true
-    return !inputElement.validity.valid;
-  })
-};
+// включаем / выключаем кнопку в зависимости от валидности формы
+function handleFormInput(formElement, submitButton, inactiveButtonClass){
+  const hasErrors = !formElement.checkValidity();
+  submitButton.disabled = hasErrors;
+  submitButton.classList.toggle(inactiveButtonClass, hasErrors);
+}
 
-// Функция принимает массив полей ввода и элемент кнопки, состояние которой нужно менять
-function toggleButtonState (inputList, buttonElement, inactiveButtonClass) {
-  // Если есть хотя бы один невалидный инпут
-  if (hasInvalidInput(inputList)) {
-    // сделает кнопку неактивной
-    buttonElement.classList.add(inactiveButtonClass);
-    buttonElement.setAttribute('disabled', 'true');
-  } else {
-    // иначе сделает кнопку активной
-    buttonElement.classList.remove(inactiveButtonClass);
-    buttonElement.removeAttribute('disabled');
-  }
-};
-
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  as: 'popup__input_type_error',
-  errorClass: 'popup__input_error_active'
-});
+enableValidation(argument);

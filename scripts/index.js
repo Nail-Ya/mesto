@@ -21,26 +21,18 @@ const nameInput = document.querySelector('.popup__input_edit_name');
 const jobInput = document.querySelector('.popup__input_edit_job');
 const popups = document.querySelector('.popups');
 
-const formValidationOptions = {
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button',
-  inactiveButtonClass: 'popup__button_disabled',
-  inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input_error_active'
-}
-
 function openPopupEditProfile () {
   popupEditProfile.classList.toggle('popup_opened');
   if (popupEditProfile.classList.contains('popup_opened')) {
     nameInput.value = profileName.textContent;
     jobInput.value = profileJob.textContent;
   }
-  enableValidation(formValidationOptions);
   document.addEventListener('keydown', closePopupByPressingEsc);
   // сбрасывание ошибки в импутах при повторном открытии попапа
-  hideInputError (formElementEditProfile, nameInput, formValidationOptions);
-  hideInputError (formElementEditProfile, jobInput, formValidationOptions);
+  hideInputError (formElementEditProfile, nameInput, argument);
+  hideInputError (formElementEditProfile, jobInput, argument);
+  // вызов функции handleFormInput чтобы кнопка была активной при открытии попапа с заполненными инпутами
+  handleFormInput(formElementEditProfile, popupSaveButton, argument.inactiveButtonClass);
 }
 
 // функция изменения имени и рода деятельности в секции profile
@@ -103,10 +95,10 @@ function openPopupAddPlace () {
   popupAddPlaceLinkInput.value = '';
   document.addEventListener('keydown', closePopupByPressingEsc);
   //делаю кнопку нективной при повторном открытии попапа если в первом открытии ввели корректный данные
-  setEventListeners (formElementAddPlace, formValidationOptions);
+  setEventListeners (formElementAddPlace, argument);
   //сбрасывание ошибки в импутах при повторном открытии попапа
-  hideInputError (formElementAddPlace, popupAddPlaceNameInput, formValidationOptions);
-  hideInputError (formElementAddPlace, popupAddPlaceLinkInput, formValidationOptions);
+  hideInputError (formElementAddPlace, popupAddPlaceNameInput, argument);
+  hideInputError (formElementAddPlace, popupAddPlaceLinkInput, argument);
 }
 
 profileAddButton.addEventListener('click', openPopupAddPlace);
