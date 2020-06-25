@@ -1,4 +1,3 @@
-
 export class Card {
   constructor(template, cardName, cardLink) {
     this._template = template;
@@ -13,7 +12,6 @@ export class Card {
       .content
       .querySelector('.element')
       .cloneNode(true);
-
       return cardElement;
   }
 
@@ -39,7 +37,7 @@ export class Card {
     })
 
     this._element.querySelector('.element__img').addEventListener('click', () => {
-      this._openPopupPhoto();
+      this._transferImageNameAndLink();
     })
   }
 
@@ -51,31 +49,13 @@ export class Card {
     // метод возможности удалить карточку
   _deleteElement() {
     this._element.remove();
-    this._element = null;
   }
 
-  // метод закрытия попапа нажатием кнопки Esc
-  _closePopupByPressingEsc (evt){
-    if (evt.key === "Escape") {
-      document.querySelector('.popup_opened').classList.remove('popup_opened');
-      //
-      //не удаляется данный слушатель
-      //
-      document.removeEventListener('keydown', this._closePopupByPressingEsc);
-    }
-
-  }
-    // метод возможности открыть попап с увеличенной картинкой
-  _openPopupPhoto() {
+    // метод передающий нужные ссылку и название изображения
+  _transferImageNameAndLink() {
     const popupOpenImage = document.querySelector('.popup_open_image');
     popupOpenImage.querySelector('.popup__image-name').textContent = this._cardName;
     popupOpenImage.querySelector('.popup__image').src = this._cardLink;
     popupOpenImage.querySelector('.popup__image').alt = this._cardName;
-    popupOpenImage.classList.toggle('popup_opened');
-
-    //добавление слушателя
-    document.addEventListener('keydown', this._closePopupByPressingEsc);
-
   }
-
 }
