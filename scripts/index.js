@@ -1,6 +1,7 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
 import {initialCards} from './initialCard.js';
+import {closePopup, closeByOverlay, closePopupByPressingEsc} from './utils.js'
 
 const profileEditButton = document.querySelector('.profile__edit-button');
 const profileAddButton = document.querySelector('.profile__add-button');
@@ -36,32 +37,10 @@ const validationPopupEditProfile = new FormValidator(popupEditProfile, formOptio
 // функция для открытия попапа и добавления слушателей
 function openPopup (popupElement) {
   popupElement.classList.add('popup_opened');
-  document.addEventListener('click', closeByOverlay);
+  document.addEventListener('mousedown', closeByOverlay);
   document.addEventListener('keydown', closePopupByPressingEsc);
 }
 
-// функция для закрытия попапа и удаления слушателей
-function closePopup (popupElement) {
-  popupElement.classList.remove('popup_opened');
-  document.removeEventListener('click', closeByOverlay);
-  document.removeEventListener('keydown', closePopupByPressingEsc);
-}
-
-// функция закрытия попапа нажатием на overlay
-function closeByOverlay (event) {
-  if (event.target.classList.contains('popup_opened')) {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-// функция закрытия попапа нажатием на Esc
-function closePopupByPressingEsc (event) {
-  if (event.key === "Escape") {
-    closePopup(document.querySelector('.popup_opened'));
-  }
-}
-
-// функция закрытия попапа нажатием на кнопку крестик
 function closePopupByButton(event) {
   closePopup(event.target.closest('.popup'));
 }
@@ -73,10 +52,8 @@ popupImageCloseButton.addEventListener('click', closePopupByButton);
 // функция открытия попапа редактирования профиля
 function openPopupEditProfile () {
   openPopup(popupEditProfile);
-  if (popupEditProfile.classList.contains('popup_opened')) {
-    nameInput.value = profileName.textContent;
-    jobInput.value = profileJob.textContent;
-  }
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileJob.textContent;
   // удаление ошибок при повторном открытии
   validationPopupEditProfile.deleteError(nameInput);
   validationPopupEditProfile.deleteError(jobInput);
@@ -124,10 +101,7 @@ formElementAddPlace.addEventListener('submit', formSubmitHandlerAddPlace);
 initialCards.forEach(function (item) {
   const card = new Card('.element-template', item.name, item.link);
   const cardElement = card.generateCard();
-  elementsContainer.prepend(cardElement);
-  cardElement.querySelector('.element__img').addEventListener('click', () => {
-    openPopup(popupOpenImage);
-  })
+  elementsContainer.append(cardElement);
 })
 
 // вызов метода валидации

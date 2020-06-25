@@ -1,3 +1,4 @@
+import {closeByOverlay, closePopupByPressingEsc} from './utils.js'
 export class Card {
   constructor(template, cardName, cardLink) {
     this._template = template;
@@ -37,7 +38,7 @@ export class Card {
     })
 
     this._element.querySelector('.element__img').addEventListener('click', () => {
-      this._transferImageNameAndLink();
+      this._openImage();
     })
   }
 
@@ -49,13 +50,19 @@ export class Card {
     // метод возможности удалить карточку
   _deleteElement() {
     this._element.remove();
+    this._element = null;
   }
 
     // метод передающий нужные ссылку и название изображения
-  _transferImageNameAndLink() {
+  _openImage() {
     const popupOpenImage = document.querySelector('.popup_open_image');
     popupOpenImage.querySelector('.popup__image-name').textContent = this._cardName;
     popupOpenImage.querySelector('.popup__image').src = this._cardLink;
     popupOpenImage.querySelector('.popup__image').alt = this._cardName;
+    popupOpenImage.classList.add('popup_opened');
+    document.addEventListener('click', closeByOverlay);
+    document.addEventListener('keydown', closePopupByPressingEsc);
   }
 }
+
+

@@ -14,7 +14,7 @@ export class FormValidator {
   //удаление класса с ошибкой
   _hideInputError(element) { //скрытие ошибки
     const errorElement = this._formElement.querySelector(`#${element.id}-error`);
-    element.classList.remove(this._formOptions.inputErrorClass); //'popup__input_error'
+    element.classList.remove(this._formOptions.inputErrorClass);
     errorElement.classList.remove(this._formOptions.errorClass);
     errorElement.textContent = '';
   }
