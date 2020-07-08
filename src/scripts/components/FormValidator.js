@@ -2,6 +2,8 @@ export class FormValidator {
   constructor(formElement, formOptions) {
     this._formElement = formElement;
     this._formOptions = formOptions;
+    this._submitButton = this._formElement.querySelector(this._formOptions.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(this._formOptions.inputSelector));
   }
   //добавление класса с ошибкой
   _showInputError(element) {
@@ -20,21 +22,18 @@ export class FormValidator {
   }
   // проверка всех инпутов формы
   _hasInvalidInput() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._formOptions.inputSelector));
-    return inputList.some((inputElement) => {
+    return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     })
   }
   //блокировка кнопки если инпут невалидный
   _toggleButtonState() {
-    const submitButton = this._formElement.querySelector(this._formOptions.submitButtonSelector);
-
     if (this._hasInvalidInput()) {
-      submitButton.classList.add(this._formOptions.inactiveButtonClass);
-      submitButton.disabled = true;
+      this._submitButton.classList.add(this._formOptions.inactiveButtonClass);
+      this._submitButton.disabled = true;
     } else {
-      submitButton.classList.remove(this._formOptions.inactiveButtonClass);
-      submitButton.disabled = false;
+      this._submitButton.classList.remove(this._formOptions.inactiveButtonClass);
+      this._submitButton.disabled = false;
     }
   }
 
@@ -46,13 +45,13 @@ export class FormValidator {
   }
 
   enableValidation() {
-    const inputList = Array.from(this._formElement.querySelectorAll(this._formOptions.inputSelector));
-    inputList.forEach((inputElement) => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
         this._isValid(inputElement);
         this._toggleButtonState();
       })
     })
+    this._formElement.addEventListener('submit', (evt) => evt.preventDefault());
   }
 
   // публичный метод для использования в index.js

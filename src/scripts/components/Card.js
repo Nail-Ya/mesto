@@ -1,9 +1,9 @@
-import {closeByOverlay, closePopupByPressingEsc} from './utils.js'
 export class Card {
-  constructor(template, cardName, cardLink) {
+  constructor(template, cardName, cardLink, {handleCardClick}) {
     this._template = template;
     this._cardName = cardName;
     this._cardLink = cardLink;
+    this._handleCardClick = handleCardClick;
   }
 
     //создание пустой карточки из шаблона
@@ -38,7 +38,7 @@ export class Card {
     })
 
     this._element.querySelector('.element__img').addEventListener('click', () => {
-      this._openImage();
+      this._handleCardClick();
     })
   }
 
@@ -51,17 +51,6 @@ export class Card {
   _deleteElement() {
     this._element.remove();
     this._element = null;
-  }
-
-    // метод передающий нужные ссылку и название изображения
-  _openImage() {
-    const popupOpenImage = document.querySelector('.popup_open_image');
-    popupOpenImage.querySelector('.popup__image-name').textContent = this._cardName;
-    popupOpenImage.querySelector('.popup__image').src = this._cardLink;
-    popupOpenImage.querySelector('.popup__image').alt = this._cardName;
-    popupOpenImage.classList.add('popup_opened');
-    document.addEventListener('click', closeByOverlay);
-    document.addEventListener('keydown', closePopupByPressingEsc);
   }
 }
 
