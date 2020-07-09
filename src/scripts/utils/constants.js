@@ -2,7 +2,6 @@ export const profileEditButton = document.querySelector('.profile__edit-button')
 export const profileAddButton = document.querySelector('.profile__add-button');
 export const popupAddPlace = document.querySelector('.popup_add_place');
 export const popupEditProfile = document.querySelector('.popup_edit_profile');
-export const elementsContainer = document.querySelector('.elements');
 export const popupAddPlaceNameInput = document.querySelector('.popup__input_place_name');
 export const popupAddPlaceLinkInput = document.querySelector('.popup__input_place_link');
 export const nameInput = document.querySelector('.popup__input_edit_name');

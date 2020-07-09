@@ -8,12 +8,11 @@ export class Card {
 
     //создание пустой карточки из шаблона
   _getTemplate() {
-    const cardElement = document
-      .querySelector(this._template)
-      .content
-      .querySelector('.element')
-      .cloneNode(true);
-      return cardElement;
+    return document
+    .querySelector(this._template)
+    .content
+    .querySelector('.element')
+    .cloneNode(true);
   }
 
     //метод создает карточку из шаблона и заполняет его контентом
