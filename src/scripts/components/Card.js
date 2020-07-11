@@ -4,6 +4,8 @@ export class Card {
     this._cardName = cardName;
     this._cardLink = cardLink;
     this._handleCardClick = handleCardClick;
+    this._likeCardListener = this._toggleLike.bind(this);
+    this._deleteCardListener = this._deleteElement.bind(this);
   }
 
     //создание пустой карточки из шаблона
@@ -28,17 +30,9 @@ export class Card {
 
     //метод устанавливает слушатели
   _setEventListeners() {
-    this._element.querySelector('.element__like-button').addEventListener('click', () => {
-      this._toggleLike();
-    })
-
-    this._element.querySelector('.element__delete-button').addEventListener('click', () => {
-      this._deleteElement();
-    })
-
-    this._element.querySelector('.element__img').addEventListener('click', () => {
-      this._handleCardClick();
-    })
+    this._element.querySelector('.element__like-button').addEventListener('click', this._likeCardListener);
+    this._element.querySelector('.element__delete-button').addEventListener('click', this._deleteCardListener);
+    this._element.querySelector('.element__img').addEventListener('click', this._handleCardClick);
   }
 
     // метод возможности поставить лайк
@@ -48,6 +42,9 @@ export class Card {
 
     // метод возможности удалить карточку
   _deleteElement() {
+    this._element.querySelector('.element__like-button').removeEventListener('click', this._likeCardListener);
+    this._element.querySelector('.element__delete-button').removeEventListener('click', this._deleteCardListener);
+    this._element.querySelector('.element__img').removeEventListener('click', this._handleCardClick);
     this._element.remove();
     this._element = null;
   }
