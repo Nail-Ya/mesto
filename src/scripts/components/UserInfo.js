@@ -1,14 +1,15 @@
 export class UserInfo {
-  constructor(userName, userJob) {
+  constructor(userName, userAbout, userAvatar) {
     this._userName = document.querySelector(userName);
-    this._userJob = document.querySelector(userJob);
+    this._userAbout = document.querySelector(userAbout);
+    this._userAvatar = document.querySelector(userAvatar);
   }
 
   // получение данных из секции profile
   getUserInfo() {
     this._userInfo = {
       name: this._userName.textContent,
-      job: this._userJob.textContent
+      about: this._userAbout.textContent
     }
     return this._userInfo;
   }
@@ -16,6 +17,12 @@ export class UserInfo {
   // установка данных в секцию profile
   setUserInfo(inputList) {
     this._userName.textContent = inputList.name;
-    this._userJob.textContent = inputList.job;
+    this._userAbout.textContent = inputList.about;
+    this._userAvatar.src = inputList.avatar;
+  }
+
+  // установка нового аватара
+  setNewAvatar(inputList) {
+    this._userAvatar.src = inputList.avatar;
   }
 }

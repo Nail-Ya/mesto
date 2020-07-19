@@ -13,7 +13,11 @@
 
   <main class="content">
     <section class="profile">
-      <img src="./../src/images/kusto.jpg" alt="Фотография пользователя" class="profile__avatar">
+      <div class="profile__avatar-section">
+        <img src="" alt="Фотография пользователя" class="profile__avatar-image">
+        <button class="profile__avatar-change-button" type="button"></button>
+      </div>
+
       <div class="profile__info">
         <div class="profile__container">
           <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -33,7 +37,7 @@
           <p class="popup__text">Редактировать профиль </p>
           <input name= "name" id="name-input" type="text" class="popup__input popup__input_edit_name" placeholder="Ваше имя" required minlength="2" maxlength="40" pattern="[A-Za-z А-ЯЁа-яё -]{1,}">
           <span id="name-input-error" class="popup__input_error_active"></span>
-          <input name= "job" id="job-input" type="text" class="popup__input popup__input_edit_job" placeholder="Род деятельности" required minlength="2" maxlength="200">
+          <input name= "about" id="job-input" type="text" class="popup__input popup__input_edit_job" placeholder="Род деятельности" required minlength="2" maxlength="200">
           <span id="job-input-error" class="popup__input_error_active"></span>
           <button class="popup__button popup__button_type_save" type="submit">Сохранить</button>
           <button class="popup__close-button popup__close-button_edit-profile" type="button"></button>
@@ -53,11 +57,29 @@
       </div>
 
       <div class="popup popup_open_image">
-        <div class="popup__image-container">
+        <div class="popup__container">
           <img class="popup__image">
-          <button class="popup__close-button popup__close-button_image-container" type="button"></button>
+          <button class="popup__close-button" type="button"></button>
           <p class="popup__image-name"></p>
         </div>
+      </div>
+
+      <div class="popup popup_delete_card">
+        <form class="popup__form">
+          <p class="popup__text">Вы уверены?</p>
+          <button class="popup__button popup__button_type_yes-sure" type="submit">Да</button>
+          <button class="popup__close-button" type="button"></button>
+        </form>
+      </div>
+
+      <div class="popup popup_change_avatar">
+        <form class="popup__form" novalidate>
+          <p class="popup__text">Обновить аватар</p>
+          <input name="url" id="avatar-input" type="url" class="popup__input popup__input_avatar_link" placeholder="Ссылка на картинку" required>
+          <span id="avatar-input-error" class="popup__input_error_active"></span>
+          <button class="popup__button" type="submit">Сохранить</button>
+          <button class="popup__close-button" type="button"></button>
+        </form>
       </div>
     </section>
   </main>
@@ -72,7 +94,10 @@
       <button class="element__delete-button" type="button"></button>
       <div class="element__info">
         <p class="element__name"></p>
-        <button class="element__like-button" type="button"></button>
+        <div class="element__like-section">
+          <button class="element__like-button" type="button"></button>
+          <p class="element__like-counter">333</p>
+        </div>
       </div>
     </div>
   </template>
