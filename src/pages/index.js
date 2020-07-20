@@ -132,7 +132,6 @@ const popupFormChangeAvatar = new PopupWithForm(
       api
         .updateUserAvatar(inputValues)
         .then((data) => {
-          console.log(data)
           userInfo.setNewAvatar(data);
         })
         .catch((err) => console.log(`Произошла ошибка: ${err}`))

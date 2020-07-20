@@ -14,7 +14,7 @@
 }
 
 .profile__avatar-change-button:hover {
-  background-image: url('../../../images/avatar-button.svg');
+  background-image: url(../../../images/avatar-button.svg);
   background-size: 26px 26px;
   background-repeat: no-repeat;
   background-position: center;
