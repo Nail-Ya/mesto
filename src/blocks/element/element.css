@@ -1,5 +1,6 @@
 @import url(./__img/element__img.css);
 @import url(./__delete-button/element__delete-button.css);
+@import url(./__delete-button/_disactive/element__delete-button_disactive.css);
 @import url(./__info/element__info.css);
 @import url(./__name/element__name.css);
 @import url(./__like-button/element__like-button.css);

@@ -6,7 +6,7 @@ export class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
     this._form = this._popupElement.querySelector('.popup__form');
     this._button = this._form.querySelector('.popup__button');
-    this._buttonText = this._button.textContent;
+
   }
 
   // запись данных из импута в объект this._formValues
@@ -36,12 +36,8 @@ export class PopupWithForm extends Popup {
   }
 
   // изображение состояния загрузки
-  renderLoading(isLoading) {
-    if (isLoading) {
-      this._button.textContent = `Сохранение...`;
-    } else {
-      this._button.textContent = this._buttonText;
-    }
+  renderLoading(buttonText) {
+    this._button.textContent = buttonText;
   }
 }
 

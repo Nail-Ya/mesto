@@ -1,24 +1,25 @@
 import { Popup } from './Popup.js';
 
 export class PopupDeleteCard extends Popup {
-  constructor(popupSelector, api, card) {
+  constructor(popupSelector, {handleDelete}) {
     super(popupSelector);
-    this._formElement = this._popupElement.querySelector('.popup__form');
-    this._api = api;
-    this._card = card;
+    this._handleDelete = handleDelete;
+    this._deleteCard = this._deleteCard.bind(this);
   }
 
-  //Установить слушатели событий
-  _setEventListeners() {
-    super._setEventListeners();
-    const deleteFunction = (event) => {
-      event.preventDefault();
-      this._api.then(() => {
-        document.querySelector('#this._card._id').remove();
-      });
-      this._formElement.removeEventListener('submit', deleteFunction);
-      this.close();
-    };
-    this._formElement.addEventListener('submit', deleteFunction);
+  _deleteCard(evt) {
+    evt.preventDefault();
+    this._handleDelete();
+    this.close();
+  }
+
+  setEventListeners() {
+    super.setEventListeners();
+    this._popupElement.addEventListener('submit', this._deleteCard);
+  }
+
+  close() {
+    super.close();
+    this._popupElement.removeEventListener('submit', this._deleteCard);
   }
 }

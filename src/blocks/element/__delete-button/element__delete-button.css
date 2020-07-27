@@ -11,7 +11,7 @@
   position: absolute;
   top: 18px;
   left: 248px;
-  display: none;
+  display: block;
 }
 
 .element__delete-button:hover {

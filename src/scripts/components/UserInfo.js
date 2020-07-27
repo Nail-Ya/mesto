@@ -2,7 +2,6 @@ export class UserInfo {
   constructor(userName, userAbout, userAvatar) {
     this._userName = document.querySelector(userName);
     this._userAbout = document.querySelector(userAbout);
-    this._userAvatar = document.querySelector(userAvatar);
   }
 
   // получение данных из секции profile
@@ -18,11 +17,5 @@ export class UserInfo {
   setUserInfo(inputList) {
     this._userName.textContent = inputList.name;
     this._userAbout.textContent = inputList.about;
-    this._userAvatar.src = inputList.avatar;
-  }
-
-  // установка нового аватара
-  setNewAvatar(inputList) {
-    this._userAvatar.src = inputList.avatar;
   }
 }
