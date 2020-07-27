@@ -32,7 +32,7 @@ export class Popup {
 
   setEventListeners() {
     this._closeButton.addEventListener('click', () => {
-      this.close()
+      this.close();
     });
   }
 }

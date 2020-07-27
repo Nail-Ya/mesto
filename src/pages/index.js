@@ -24,8 +24,7 @@ import {
   popupChangeAvatar,
   profileAvatarChangeButton,
   popupChangeAvatarLinkInput,
-  optionsApi,
-  avatarImg
+  optionsApi
 } from './../scripts/utils/constants.js';
 
 // экземпляр класса Api
@@ -42,14 +41,13 @@ validationPopupEditProfile.enableValidation();
 validationPopupChangeAvatar.enableValidation();
 
 // экземпляр класса UserInfo с информацией о пользователе
-const profileUserInfo = new UserInfo('.profile__name', '.profile__job');
+const profileUserInfo = new UserInfo('.profile__name', '.profile__job', '.profile__avatar-image');
 
 // загрузка информации о пользователе из сервера
 api
   .getUserInfo()
   .then((data) => {
     profileUserInfo.setUserInfo(data);
-    avatarImg.src = data.avatar;
   })
   .catch((err) => console.log(`Ошибка: ${err}`));
 
@@ -65,6 +63,9 @@ const generatingCard = (cardItem) => {
         .deletePhoto(cardItem)
         .then(() => card.deleteCards())
         .catch(err => console.log(`Ошибка: ${err}`))
+        .finally(() => {
+          deletePopup.close();
+        });
     }
   });
   // экземпляр класса Card для создания новой карточки
@@ -151,6 +152,7 @@ api
           .catch(err => console.log(`Ошибка: ${err}`))
           .finally(() => {
             popupFormAddPlace.renderLoading('Создать');
+            popupFormAddPlace.close();
           });
       }
     })
@@ -180,6 +182,7 @@ const popupFormEditProfile = new PopupWithForm(
         .catch((err) => console.log(`Ошибка: ${err}`))
         .finally(() => {
           popupFormEditProfile.renderLoading('Сохранить');
+          popupFormEditProfile.close();
         });
     }
   }
@@ -205,11 +208,12 @@ const popupFormChangeAvatar = new PopupWithForm(
       api
         .updateUserAvatar(inputValues)
         .then((data) => {
-          avatarImg.src = data.avatar;
+          profileUserInfo.setUserInfo(data);
         })
         .catch((err) => console.log(`Ошибка: ${err}`))
         .finally(() => {
           popupFormChangeAvatar.renderLoading('Сохранить');
+          popupFormChangeAvatar.close();
         });
     }
   }

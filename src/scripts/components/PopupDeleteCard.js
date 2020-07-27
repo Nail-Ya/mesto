@@ -10,7 +10,6 @@ export class PopupDeleteCard extends Popup {
   _deleteCard(evt) {
     evt.preventDefault();
     this._handleDelete();
-    this.close();
   }
 
   setEventListeners() {
