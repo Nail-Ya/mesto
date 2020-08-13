@@ -1,6 +1,7 @@
 {
   "name": "mesto",
   "version": "0.0.1",
+  "homepage": "./",
   "description": "Learning platform",
   "main": "index.js",
   "scripts": {
@@ -18,7 +19,6 @@
   "bugs": {
     "url": "https://github.com/Nail-Ya/mesto/issues"
   },
-  "homepage": "https://github.com/Nail-Ya/mesto",
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
