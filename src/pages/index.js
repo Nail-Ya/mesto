@@ -35,7 +35,7 @@ const validationPopupAddPhoto = new FormValidator(popupAddPlace, formOptions);
 const validationPopupEditProfile = new FormValidator(popupEditProfile, formOptions);
 const validationPopupChangeAvatar = new FormValidator(popupChangeAvatar, formOptions);
 
-// добавление валидации на всю страницу
+// добавление валидации к каждой форме
 validationPopupAddPhoto.enableValidation();
 validationPopupEditProfile.enableValidation();
 validationPopupChangeAvatar.enableValidation();

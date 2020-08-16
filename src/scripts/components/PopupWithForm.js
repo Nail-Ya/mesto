@@ -9,7 +9,7 @@ export class PopupWithForm extends Popup {
 
   }
 
-  // запись данных из импута в объект this._formValues
+  // запись данных из инпута в объект this._formValues
   _getInputValues() {
     this._inputList = this._popupElement.querySelectorAll('.popup__input');
     this._formValues = {};
