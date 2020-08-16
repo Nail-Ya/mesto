@@ -24,7 +24,6 @@ export class Card {
     .content
     .querySelector('.element')
     .cloneNode(true);
-    this._element = cardElement;
     return cardElement;
   }
 

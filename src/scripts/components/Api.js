@@ -4,6 +4,7 @@ export class Api {
     this._headers = options.headers;
   }
 
+  // метод для обработки ответов от сервера
   _handleResponse(res) {
     if (res.ok) {
       return res.json();
