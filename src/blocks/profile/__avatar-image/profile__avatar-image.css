@@ -4,6 +4,7 @@
   border-radius: 50%;
   display: block;
   object-fit: cover;
+  color: white; /* чтобы текст атрибута alt был виден */
 }
 
 .profile__avatar-image:hover {
