@@ -15,7 +15,7 @@ https://nail-ya.github.io/mesto/
 ## Стек
 * HTML
 * CSS
-* Native JavaScript
+* JavaScript
 * Webpack
 
 
@@ -30,9 +30,4 @@ npm run build # собрать проект
 ## Планы по доработке
 * Перенести проект на React
 
-https://github.com/Nail-Ya/mesto-react
-
-
-
-
-
+https://github.com/Nail-Ya/react-mesto-auth
